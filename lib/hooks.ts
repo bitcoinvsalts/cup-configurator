@@ -26,20 +26,23 @@ export const useInitFabricCanvas = () => {
       const { height, width } = container.getBoundingClientRect()
 
       // Create canvas with default options
-      const fabricCanvas = new fabric.Canvas(document.createElement('canvas'), {
-        backgroundColor: '#f2f2f2',
-        height,
-        width,
-      }) as FabricCanvas
+      const fabricCanvasInstance = new fabric.Canvas(
+        document.createElement('canvas'),
+        {
+          backgroundColor: '#f2f2f2',
+          height,
+          width,
+        }
+      ) as FabricCanvas
 
       // Set a link for the canvas object to the store
-      setCanvas(fabricCanvas)
+      setCanvas(fabricCanvasInstance)
 
       // Render the canvas
-      fabricCanvas.renderAll()
+      fabricCanvasInstance.renderAll()
 
       // Append canvas node to the provided wrapper element
-      container.appendChild(fabricCanvas.wrapperEl)
+      container.appendChild(fabricCanvasInstance.wrapperEl)
     }
 
     // Make sure that the fabric canvas has been initialized only once

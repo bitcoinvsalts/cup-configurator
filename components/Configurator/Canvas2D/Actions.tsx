@@ -13,7 +13,6 @@ import { ButtonProps, Button } from '@/components/ui/button'
 import { downloadCanvasAsImage, cn } from '@/lib/utils'
 import WithTooltip from '@/components/WithTooltip'
 import { useFabricCanvas } from '@/lib/hooks'
-import { Image } from 'fabric/fabric-impl'
 import { useState, useMemo } from 'react'
 
 import IntrinsicAttributes = JSX.IntrinsicAttributes
@@ -21,7 +20,7 @@ import IntrinsicAttributes = JSX.IntrinsicAttributes
 type CanvasAction = {
   component: {
     element: ForwardRefExoticComponent<
-      ButtonProps & RefAttributes<HTMLButtonElement>
+      RefAttributes<HTMLButtonElement> & ButtonProps
     >
     props: ButtonProps
   }
@@ -45,7 +44,7 @@ export default function Canvas2DActions() {
                   .remove(...canvas.getObjects())
                   // Clear canvas background
                   .setBackgroundImage(
-                    null as unknown as Image,
+                    null as unknown as fabric.Image,
                     canvas.renderAll.bind(canvas)
                   )
                   // Patterns are set as the background color, so don't forget to clear them too
@@ -72,7 +71,7 @@ export default function Canvas2DActions() {
                 // Clear canvas background
                 canvas
                   .setBackgroundImage(
-                    null as unknown as Image,
+                    null as unknown as fabric.Image,
                     canvas.renderAll.bind(canvas)
                   )
                   .setBackgroundColor(
