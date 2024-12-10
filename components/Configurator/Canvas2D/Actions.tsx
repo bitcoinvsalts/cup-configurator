@@ -14,6 +14,8 @@ import { downloadCanvasAsImage, cn } from '@/lib/utils'
 import WithTooltip from '@/components/WithTooltip'
 import { useFabricCanvas } from '@/lib/hooks'
 import { useState, useMemo } from 'react'
+import { FabricImage } from 'fabric'
+import image from 'next/image'
 
 import IntrinsicAttributes = JSX.IntrinsicAttributes
 
@@ -40,16 +42,12 @@ export default function Canvas2DActions() {
               onClick: () => {
                 if (!canvas) return
                 // Remove all objects from fabric canvas
-                canvas
-                  .remove(...canvas.getObjects())
-                  // Clear canvas background
-                  .setBackgroundImage(
-                    null as unknown as fabric.Image,
-                    canvas.renderAll.bind(canvas)
-                  )
-                  // Patterns are set as the background color, so don't forget to clear them too
-                  .setBackgroundColor('#f2f2f2', () => {})
-                  .renderAll()
+                canvas.remove(...canvas.getObjects())
+                // Clear canvas background
+                console.log('Clear canvas background....')
+                canvas.backgroundImage = null as unknown as FabricImage
+                canvas.backgroundColor = '#f2f2f2'
+                canvas.requestRenderAll()
               },
             },
             element: Button,
@@ -69,17 +67,10 @@ export default function Canvas2DActions() {
               onClick: () => {
                 if (!canvas) return
                 // Clear canvas background
-                canvas
-                  .setBackgroundImage(
-                    null as unknown as fabric.Image,
-                    canvas.renderAll.bind(canvas)
-                  )
-                  .setBackgroundColor(
-                    // The patterns are the background, so clean it up as well.
-                    '#f2f2f2',
-                    () => {}
-                  )
-                  .renderAll()
+                console.log('Clear canvas backgroundxx')
+                canvas.backgroundImage = null as unknown as FabricImage
+                canvas.backgroundColor = '#f2f2f2'
+                canvas.requestRenderAll()
               },
             },
             element: Button,
@@ -102,6 +93,7 @@ export default function Canvas2DActions() {
                 if (!activeObject) return
                 canvas.sendObjectToBack(activeObject)
                 canvas.discardActiveObject()
+                canvas.requestRenderAll()
               },
             },
             element: Button,
@@ -124,6 +116,7 @@ export default function Canvas2DActions() {
                 if (!activeObject) return
                 canvas.bringObjectToFront(activeObject)
                 canvas.discardActiveObject()
+                canvas.requestRenderAll()
               },
             },
             element: Button,
