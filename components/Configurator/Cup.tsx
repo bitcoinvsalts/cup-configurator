@@ -13,24 +13,13 @@ import { useFrame } from '@react-three/fiber'
 import { useStore } from '@/lib/store'
 import { useRef } from 'react'
 
-type GLTFResult = GLTF & {
-  materials: {
-    DecalMaterial: MeshStandardMaterial
-    Porcelan: MeshStandardMaterial
-  }
-  nodes: {
-    CupDrawArea: Mesh
-    Cup: Mesh
-  }
-}
-
 type CupDrawAreaMesh = Mesh<BufferGeometry, MeshStandardMaterial>
 
-const cupModelPath = '/models/cup.glb'
+const cupModelPath = '/models/40425-cs-stkr.gltf'
 const baseTexturesPath = '/textures'
 
 export default function Cup() {
-  const { materials, nodes } = useGLTF(cupModelPath, true) as GLTFResult
+  const { materials, nodes } = useGLTF(cupModelPath, true)
   const props = useTexture({
     displacementMap: `${baseTexturesPath}/displacement.jpg`,
     roughnessMap: `${baseTexturesPath}/roughness.jpg`,
@@ -67,27 +56,22 @@ export default function Cup() {
 
   return (
     <group {...props} dispose={null} ref={groupRef} scale={0}>
-      <mesh
-        geometry={nodes.Cup.geometry}
-        material={materials.Porcelan}
-        receiveShadow
-        castShadow
-      >
-        <meshStandardMaterial {...props} displacementScale={0} />
-      </mesh>
-      <mesh
-        geometry={nodes.CupDrawArea.geometry}
-        material={materials.DecalMaterial}
-        ref={cupDrawAreaRef}
-        receiveShadow
-        castShadow
-      />
-      <Shadow
-        position={[-0.35, 0, -0.25]}
-        color="black"
-        opacity={1}
-        scale={2.5}
-      />
+      {Object.values(nodes).map((node, index) => {
+        if ((node as Mesh).isMesh) {
+          const mesh = node as Mesh
+          return (
+            <mesh
+              ref={mesh.name === 'In_Body_Center' ? cupDrawAreaRef : undefined}
+              geometry={mesh.geometry}
+              material={mesh.material}
+              receiveShadow
+              key={index}
+              castShadow
+            ></mesh>
+          )
+        }
+        return null
+      })}
     </group>
   )
 }

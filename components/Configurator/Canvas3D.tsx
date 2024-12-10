@@ -39,14 +39,7 @@ export default function Canvas3D({ children }: { children: ReactNode }) {
         className="canvas3D"
         linear
       >
-        <ambientLight intensity={0.2} />
-        <Sparkles
-          position={[0, 3, 0]}
-          speed={0.4}
-          count={48}
-          scale={5}
-          size={4}
-        />
+        <ambientLight intensity={0.9} />
         <Stage adjustCamera={false} environment="sunset" intensity={0.2}>
           {children}
         </Stage>
