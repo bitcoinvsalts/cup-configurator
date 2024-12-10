@@ -12,8 +12,8 @@ import {
 } from 'lucide-react'
 import { useFabricCanvas } from '@/lib/hooks'
 import { Card } from '@/components/ui/card'
+import * as fabric from 'fabric'
 import { useMemo } from 'react'
-import { fabric } from 'fabric'
 
 export default function GeometryList() {
   const { canvas } = useFabricCanvas()

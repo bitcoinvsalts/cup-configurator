@@ -2,7 +2,7 @@
 
 import ImageButton from '@/components/ImageButton'
 import { useFabricCanvas } from '@/lib/hooks'
-import { fabric } from 'fabric'
+import * as fabric from 'fabric'
 
 export default function SetBackgroundButton({
   imageUrl,
@@ -15,11 +15,15 @@ export default function SetBackgroundButton({
 
   const handleClick = () => {
     if (!canvas) return
-    fabric.Image.fromURL(imageUrl, (image) => {
+    fabric.FabricImage.fromURL(imageUrl as string).then((image) => {
+      canvas.add(image)
+      canvas.renderAll()
+      /*
       canvas.setBackgroundImage(image, canvas.renderAll.bind(canvas), {
         scaleY: (canvas.height ?? 1) / (image.height ?? 1),
         scaleX: (canvas.width ?? 1) / (image.width ?? 1),
       })
+      */
     })
   }
 

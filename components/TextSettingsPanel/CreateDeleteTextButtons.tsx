@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { useFabricCanvas } from '@/lib/hooks'
 import { useStore } from '@/lib/store'
-import { fabric } from 'fabric'
+import * as fabric from 'fabric'
 
 export default function CreateDeleteTextButtons() {
   const { textSettings } = useStore(({ panels }) => ({

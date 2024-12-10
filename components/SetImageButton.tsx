@@ -2,7 +2,7 @@
 
 import ImageButton from '@/components/ImageButton'
 import { useFabricCanvas } from '@/lib/hooks'
-import { fabric } from 'fabric'
+import * as fabric from 'fabric'
 
 export default function SetImageButton({
   imageUrl,
@@ -15,7 +15,7 @@ export default function SetImageButton({
 
   const handleClick = () => {
     if (!canvas) return
-    fabric.Image.fromURL(imageUrl, (image) => {
+    fabric.FabricImage.fromURL(imageUrl as string).then((image) => {
       image.scale(0.5)
       canvas.centerObject(image)
       canvas.add(image)

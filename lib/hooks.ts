@@ -3,7 +3,7 @@
 import type { FabricCanvas } from '@/types'
 
 import { useLayoutEffect, useCallback, ElementRef, useRef } from 'react'
-import { fabric } from 'fabric'
+import * as fabric from 'fabric'
 
 import { useStore } from './store'
 
@@ -35,7 +35,7 @@ export const useInitFabricCanvas = () => {
       // Set a link for the canvas object to the store
       setCanvas(fabricCanvas)
 
-      // Render both - lower and upper canvases
+      // Render the canvas
       fabricCanvas.renderAll()
 
       // Append canvas node to the provided wrapper element
@@ -72,23 +72,28 @@ export const useFabricCanvas = () => {
     textboxes.forEach((tb) => {
       tb.exitEditing()
       tb.set({
-        ...tb,
         selectable: false,
         editable: false,
         selected: false,
       })
     })
-    canvas.discardActiveObject().renderAll()
+    canvas.discardActiveObject()
+    canvas.renderAll()
   }, [canvas])
 
   const setCanvasBackgroundByUrl = useCallback(
     (imageUrl: `${string}.${'png' | 'jpg'}`) => {
-      fabric.Image.fromURL(imageUrl as string, (image) => {
+      fabric.FabricImage.fromURL(imageUrl as string).then((image) => {
+        console.log('image', image)
         if (!canvas) return
+        canvas.add(image)
+        canvas.renderAll()
+        /*
         canvas.setBackgroundImage(image, canvas.renderAll.bind(canvas), {
-          scaleY: (canvas.height ?? 1) / (image.height ?? 1),
-          scaleX: (canvas.width ?? 1) / (image.width ?? 1),
+          scaleY: canvas.height / (image.height ?? 1),
+          scaleX: canvas.width / (image.width ?? 1),
         })
+        */
       })
     },
     [canvas]

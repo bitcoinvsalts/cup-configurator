@@ -13,7 +13,7 @@ import { useFabricCanvas } from '@/lib/hooks'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { fabric } from 'fabric'
+import * as fabric from 'fabric'
 
 type TResponse = {
   replicate: {
@@ -61,7 +61,7 @@ export default function GenerateAiImageDialog() {
         if (data.replicate.status === 'success') {
           const imageUrl = data.replicate.items[0].image_resource_url
           // Paste generated image on canvas
-          fabric.Image.fromURL(
+          fabric.FabricImage.fromURL(
             imageUrl,
             (image) => {
               canvas && canvas.centerObject(image).add(image)

@@ -1,3 +1,5 @@
+import { Canvas as FabricCanvasBase, IText } from 'fabric'
+
 /* Prettify<T> is a utility type that takes an object type
  * and makes the hover overlay more readable. */
 type Prettify<T> = {
@@ -11,9 +13,9 @@ export type AlignValue =
   | 'center'
   | 'right'
   | 'left'
-export type FabricCanvas = fabric.Canvas & {
+export interface FabricCanvas extends FabricCanvasBase {
   lowerCanvasEl: HTMLCanvasElement
   wrapperEl: HTMLDivElement
 }
-export type TextSettings = Prettify<fabric.IText>
+export type TextSettings = Prettify<IText>
 export type PartialTextSettings = Partial<TextSettings>

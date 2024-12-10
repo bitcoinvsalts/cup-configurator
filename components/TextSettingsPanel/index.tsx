@@ -3,7 +3,7 @@
 import { useFabricCanvas } from '@/lib/hooks'
 import { ReactNode, useEffect } from 'react'
 import { useStore } from '@/lib/store'
-import { fabric } from 'fabric'
+import * as fabric from 'fabric'
 
 type Props = {
   children: ReactNode

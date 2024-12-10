@@ -6,7 +6,7 @@ import { useFabricCanvas } from '@/lib/hooks'
 import { PaperclipIcon } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { useEffect, useRef } from 'react'
-import { fabric } from 'fabric'
+import * as fabric from 'fabric'
 
 export default function UploadImageButton() {
   const inputRef = useRef<ElementRef<'input'>>(null)
@@ -26,7 +26,7 @@ export default function UploadImageButton() {
 
       reader.onload = (e) => {
         const data = e.target!.result
-        fabric.Image.fromURL(data as string, (img) => {
+        fabric.FabricImage.fromURL(data as string, (img) => {
           if (!canvas) return
           const scaleTo = canvas.width && img.width && canvas.width / img.width
           const imageObject = img.scale(scaleTo || 0.5)
