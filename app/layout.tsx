@@ -20,7 +20,7 @@ const preloadPaths = [
 ]
 
 export const metadata: Metadata = {
-  title: '3D Cup Configurator',
+  title: 'Ready Display',
   description: '',
 }
 

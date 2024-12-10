@@ -13,7 +13,7 @@ export default function Header() {
       <div className="flex h-full items-center justify-between px-4">
         <Link className="flex items-center gap-2" href="/">
           <CoffeeIcon size={18} />
-          <h1 className="text-base font-bold">Cup Configurator</h1>
+          <h1 className="text-base font-bold">Ready Display</h1>
         </Link>
         <div className="flex items-center">
           <ThemeToggler />

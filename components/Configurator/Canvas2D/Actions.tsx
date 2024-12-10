@@ -100,7 +100,8 @@ export default function Canvas2DActions() {
                 if (!canvas) return
                 const activeObject = canvas.getActiveObject()
                 if (!activeObject) return
-                canvas.sendToBack(activeObject).discardActiveObject()
+                canvas.sendObjectToBack(activeObject)
+                canvas.discardActiveObject()
               },
             },
             element: Button,
@@ -121,7 +122,8 @@ export default function Canvas2DActions() {
                 if (!canvas) return
                 const activeObject = canvas.getActiveObject()
                 if (!activeObject) return
-                canvas.bringToFront(activeObject).discardActiveObject()
+                canvas.bringObjectToFront(activeObject)
+                canvas.discardActiveObject()
               },
             },
             element: Button,

@@ -9,7 +9,7 @@ import { NoToneMapping } from 'three'
 import { useState } from 'react'
 
 export default function Canvas3D({ children }: { children: ReactNode }) {
-  const [isRotating, setIsRotating] = useState(true)
+  const [isRotating, setIsRotating] = useState(false)
 
   return (
     <>
