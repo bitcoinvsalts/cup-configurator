@@ -18,7 +18,7 @@ export default function SetBackgroundButton({
     fabric.FabricImage.fromURL(imageUrl as string).then((image) => {
       image.scaleToWidth(canvas.width)
       image.scaleToHeight(canvas.height)
-      canvas.add(image)
+      canvas.backgroundImage = image
       canvas.renderAll()
     })
   }

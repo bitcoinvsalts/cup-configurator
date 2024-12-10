@@ -90,7 +90,7 @@ export const useFabricCanvas = () => {
         if (!canvas) return
         image.scaleToWidth(canvas.width)
         image.scaleToHeight(canvas.height)
-        canvas.add(image)
+        canvas.backgroundImage = image
         canvas.renderAll()
       })
     },
