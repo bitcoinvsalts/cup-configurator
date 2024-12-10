@@ -84,16 +84,11 @@ export const useFabricCanvas = () => {
   const setCanvasBackgroundByUrl = useCallback(
     (imageUrl: `${string}.${'png' | 'jpg'}`) => {
       fabric.FabricImage.fromURL(imageUrl as string).then((image) => {
-        console.log('image', image)
         if (!canvas) return
+        image.scaleToWidth(canvas.width)
+        image.scaleToHeight(canvas.height)
         canvas.add(image)
         canvas.renderAll()
-        /*
-        canvas.setBackgroundImage(image, canvas.renderAll.bind(canvas), {
-          scaleY: canvas.height / (image.height ?? 1),
-          scaleX: canvas.width / (image.width ?? 1),
-        })
-        */
       })
     },
     [canvas]
